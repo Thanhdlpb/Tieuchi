@@ -1,0 +1,65 @@
+{
+  "allFiles": [
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/Tieuchi/app/src/main/kotlin/com/xiaozhi/hass/manager/EntityManager.kt",
+      "selection": {
+        "end": {
+          "column": 1,
+          "index": 4430,
+          "line": 144
+        },
+        "start": {
+          "column": 1,
+          "index": 4430,
+          "line": 144
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/Tieuchi/app/src/main/kotlin/com/xiaozhi/hass/ui/DashboardScreen.kt",
+      "selection": {
+        "end": {
+          "column": 1,
+          "index": 19444,
+          "line": 441
+        },
+        "start": {
+          "column": 1,
+          "index": 19444,
+          "line": 441
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/Tieuchi/app/src/main/kotlin/com/xiaozhi/MyApplication.kt",
+      "selection": {
+        "end": {
+          "column": 1,
+          "index": 31705,
+          "line": 682
+        },
+        "start": {
+          "column": 1,
+          "index": 31705,
+          "line": 682
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/Tieuchi/app/src/main/kotlin/com/xiaozhi/smarthome/HomeAssistantManager.kt",
+      "selection": {
+        "end": {
+          "column": 1,
+          "index": 7240,
+          "line": 186
+        },
+        "start": {
+          "column": 1,
+          "index": 7240,
+          "line": 186
+        }
+      }
+    }
+  ],
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/Tieuchi/app/src/main/kotlin/com/xiaozhi/smarthome/HomeAssistantManager.kt"
+}

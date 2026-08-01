@@ -88,6 +88,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.gson.JsonObject
 import com.xiaozhi.ai.Brain
+import com.xiaozhi.hass.ui.DashboardActivity  // 🔥 Import Dashboard
 import com.xiaozhi.services.FileWatcherService
 import com.xiaozhi.ui.theme.XiaoZhiTheme
 import kotlinx.coroutines.*
@@ -560,7 +561,11 @@ class MainActivity : ComponentActivity() {
                     onPlayPause = { safeMediaPlayPause() },
                     onNext = { safeMediaNext() },
                     onRequestRecordAudioPermission = { requestRecordAudioPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO) },
-                    waveformAmplitudes = waveform
+                    waveformAmplitudes = waveform,
+                    // 🔥 THÊM CALLBACK MỞ DASHBOARD
+                    onOpenDashboard = {
+                        startActivity(Intent(this, DashboardActivity::class.java))
+                    }
                 )
             }
         }
@@ -1147,7 +1152,8 @@ fun MainScreen(
     onPlayPause: () -> Unit,
     onNext: () -> Unit,
     onRequestRecordAudioPermission: () -> Unit,
-    waveformAmplitudes: List<Float>
+    waveformAmplitudes: List<Float>,
+    onOpenDashboard: () -> Unit  // 🔥 THÊM THAM SỐ
 ) {
     val context = LocalContext.current
     val density = LocalDensity.current
@@ -1245,6 +1251,11 @@ fun MainScreen(
                         }
                     },
                     actions = {
+                        // 🔥 THÊM NÚT DASHBOARD
+                        IconButton(onClick = onOpenDashboard) {
+                            Icon(Icons.Default.Home, contentDescription = "Dashboard", tint = Color(0xFF00E5FF))
+                        }
+                        // Các action cũ
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             val orbTransition = rememberInfiniteTransition(label = "orb")
                             val orbScale by orbTransition.animateFloat(

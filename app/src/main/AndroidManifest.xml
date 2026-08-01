@@ -73,6 +73,12 @@
             </intent-filter>
         </activity>
 
+        <!-- 🔥 THÊM DashboardActivity -->
+        <activity
+            android:name=".hass.ui.DashboardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.XiaoZhi" />
+
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
