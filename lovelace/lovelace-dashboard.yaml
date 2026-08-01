@@ -1,0 +1,59 @@
+title: Nhà thông minh - Tổng quan
+views:
+  - title: Tổng quan
+    path: overview
+    panel: false
+    cards:
+      - type: entities
+        title: Tình trạng nhà
+        entities:
+          - sensor.livingroom_temperature
+          - sensor.livingroom_humidity
+          - binary_sensor.frontdoor
+          - binary_sensor.motion_hall
+      - type: glance
+        title: Thiết bị nhanh
+        entities:
+          - light.livingroom
+          - switch.coffee_machine
+          - climate.home_ac
+  - title: Đèn & Thiết bị
+    path: lights
+    cards:
+      - type: entities
+        title: Đèn
+        entities:
+          - light.livingroom
+          - light.hallway
+          - light.kitchen
+      - type: entities
+        title: Thiết bị thông minh
+        entities:
+          - switch.coffee_machine
+          - switch.washer
+  - title: Camera
+    path: cameras
+    cards:
+      - type: picture-entities
+        title: Camera cửa
+        image: /local/camera_snap.jpg
+        entities:
+          - camera.front_door
+      - type: picture-glance
+        title: Tổng hợp camera
+        entities:
+          - camera.front_door
+          - camera.backyard
+  - title: Energy
+    path: energy
+    badges: []
+    cards:
+      - type: energy-usage
+  - title: Automations
+    path: automations
+    cards:
+      - type: entities
+        title: Automations chính
+        entities:
+          - automation.motion_night_light
+          - automation.arrival_good_morning

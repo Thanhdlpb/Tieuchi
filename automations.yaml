@@ -1,0 +1,20 @@
+# Ví dụ automation (YAML) — bật đèn khi motion trong đêm
+- id: 'motion_night_light'
+  alias: Motion - Night lights
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_hall
+      to: 'on'
+  condition:
+    - condition: time
+      after: '22:30:00'
+      before: '06:00:00'
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.hallway
+      data:
+        brightness_pct: 30
+    - service: notify.mobile_app_myphone
+      data:
+        message: "Phát hiện chuyển động ở hành lang (ban đêm)"

@@ -1,0 +1,21 @@
+homeassistant:
+  name: "Nhà của Tôi"
+  time_zone: "Asia/Ho_Chi_Minh"
+default_config:
+
+# Logger cơ bản
+logger:
+  default: info
+  logs:
+    homeassistant.components.zha: info
+    homeassistant.components.zwave: info
+
+# MQTT discovery (dùng Mosquitto add-on)
+mqtt:
+  broker: core-mosquitto
+  username: mqtt_user
+  password: mqtt_password
+
+# Enable integrations (UI preferred, nhưng khai báo tối thiểu)
+# Z-Wave JS nếu dùng add-on: thường cấu hình qua UI
+# Zigbee2MQTT: cấu hình trong add-on data (see file below)

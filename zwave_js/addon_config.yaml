@@ -1,0 +1,4 @@
+# Z-Wave JS add-on config (nếu dùng add-on)
+device: '/dev/ttyACM1'      # thay path phù hợp
+server:
+  use_security: false

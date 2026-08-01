@@ -1,0 +1,27 @@
+esphome:
+  name: livingroom_sensor
+  platform: ESP8266
+  board: nodemcuv2
+
+wifi:
+  ssid: "YOUR_SSID"
+  password: "YOUR_WIFI_PASS"
+
+mqtt:
+  broker: core-mosquitto
+  username: mqtt_user
+  password: mqtt_password
+
+sensor:
+  - platform: dht
+    pin: D4
+    model: DHT22
+    temperature:
+      name: "Livingroom Temperature"
+    humidity:
+      name: "Livingroom Humidity"
+    update_interval: 60s
+
+api:
+logger:
+ota:
