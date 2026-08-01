@@ -1,0 +1,12 @@
+# Dùng Zigbee2MQTT add-on (đặt trong folder data của add-on)
+homeassistant: true
+permit_join: false          # bật khi pairing thiết bị mới
+mqtt:
+  base_topic: zigbee2mqtt
+  server: 'mqtt://core-mosquitto:1883'
+  user: mqtt_user
+  password: mqtt_password
+serial:
+  port: '/dev/ttyUSB0'      # thay bằng device của bạn
+advanced:
+  network_key: []           # optional (auto)
