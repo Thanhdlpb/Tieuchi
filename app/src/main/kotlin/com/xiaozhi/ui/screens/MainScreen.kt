@@ -1,16 +1,12 @@
 package com.xiaozhi.ui.screens
 
-import android.graphics.Bitmap
-import androidx.camera.view.PreviewView
 import androidx.compose.animation.*
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -20,20 +16,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.camera.view.PreviewView
 import androidx.media3.ui.PlayerView
 import coil.compose.rememberAsyncImagePainter
 import com.xiaozhi.AIState
 import com.xiaozhi.MainUiState
-import com.xiaozhi.Message
+import com.xiaozhi.MessageData
 import com.xiaozhi.VideoPlayerManager
 
 @Composable
@@ -71,7 +66,6 @@ fun MainScreen(
             .fillMaxSize()
             .background(Color(0x0B0E14))
     ) {
-        // Main Content
         HorizontalPager(
             state = pagerState,
             modifier = Modifier.fillMaxSize()
@@ -119,12 +113,9 @@ fun MainScreen(
             }
         }
         
-        // Bottom Navigation
         BottomNavigationBar(
             currentPage = pagerState.currentPage,
-            onPageSelected = { page ->
-                // Handle page navigation via LaunchedEffect
-            },
+            onPageSelected = { },
             modifier = Modifier.align(Alignment.BottomCenter)
         )
     }
@@ -132,7 +123,7 @@ fun MainScreen(
 
 @Composable
 fun ChatScreen(
-    messages: List<Message>,
+    messages: List<com.xiaozhi.Message>,
     inputText: String,
     onInputTextChange: (String) -> Unit = {},
     onSendMessage: () -> Unit = {},
@@ -161,10 +152,8 @@ fun ChatScreen(
                 .fillMaxSize()
                 .background(Color(0x0B0E14))
         ) {
-            // Header
             ChatHeader(batteryPercent = batteryPercent)
             
-            // Video/Album Art
             if (isVideoVisible && playerView != null) {
                 Box(
                     modifier = Modifier
@@ -196,7 +185,6 @@ fun ChatScreen(
                     )
                 }
             } else {
-                // Emotion GIF or Waveform
                 EmotionDisplay(
                     emotion = currentEmotionGif,
                     waveformAmplitudes = waveformAmplitudes,
@@ -208,7 +196,6 @@ fun ChatScreen(
                 )
             }
             
-            // Messages
             LazyMessageList(
                 messages = messages,
                 modifier = Modifier
@@ -216,7 +203,6 @@ fun ChatScreen(
                     .weight(1f)
             )
             
-            // Media Controls (if music playing)
             if (currentSongTitle.isNotEmpty()) {
                 MediaControlsBar(
                     songTitle = currentSongTitle,
@@ -228,7 +214,6 @@ fun ChatScreen(
                 )
             }
             
-            // Input
             MessageInputArea(
                 text = inputText,
                 onTextChange = onInputTextChange,
@@ -311,7 +296,6 @@ fun EmotionDisplay(
             verticalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxSize()
         ) {
-            // Emotion Emoji
             Text(
                 when (emotion.lowercase()) {
                     "happy" -> "😊"
@@ -328,7 +312,6 @@ fun EmotionDisplay(
             
             Spacer(modifier = Modifier.height(12.dp))
             
-            // Waveform
             if (isMicActive && waveformAmplitudes.isNotEmpty()) {
                 WaveformVisualizer(
                     amplitudes = waveformAmplitudes,
@@ -354,7 +337,7 @@ fun EmotionDisplay(
 
 @Composable
 fun LazyMessageList(
-    messages: List<Message>,
+    messages: List<com.xiaozhi.Message>,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -373,19 +356,19 @@ fun LazyMessageList(
 
 @Composable
 fun MessageBubble(
-    message: Message,
+    message: com.xiaozhi.Message,
     modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = if (message.type == Message.TYPE_USER) Arrangement.End else Arrangement.Start
+        horizontalArrangement = if (message.type == com.xiaozhi.Message.TYPE_USER) Arrangement.End else Arrangement.Start
     ) {
         Card(
             modifier = Modifier
                 .widthIn(max = 300.dp)
                 .clip(RoundedCornerShape(12.dp)),
             colors = CardDefaults.cardColors(
-                containerColor = if (message.type == Message.TYPE_USER) Color(0xFF2196F3) else Color(0x2F2F3E)
+                containerColor = if (message.type == com.xiaozhi.Message.TYPE_USER) Color(0xFF2196F3) else Color(0x2F2F3E)
             )
         ) {
             if (message.isImage) {
@@ -565,7 +548,6 @@ fun WaveformVisualizer(
         
         amplitudes.forEachIndexed { index, amplitude ->
             val x = index * barWidth + barWidth / 2
-            val y = centerY - (amplitude * centerY).coerceIn(0f, centerY)
             val barHeight = (amplitude * height).coerceIn(2f, height)
             
             drawLine(
@@ -661,7 +643,6 @@ fun SettingsMenuScreen(
             color = Color.White
         )
         
-        // Activation Card
         if (isActivationCardVisible) {
             Card(
                 modifier = Modifier
@@ -713,7 +694,6 @@ fun SettingsMenuScreen(
             }
         }
         
-        // Settings Items
         SettingItemCard(
             title = "🎵 MCP Music",
             subtitle = "Enable/Disable music playback via MCP",
